@@ -1,8 +1,4 @@
-from custom_modules.calculation_functions import calc_circle
-
+from custom_modules.api_functions import import_cars_by_brand
 
 if __name__ == "__main__":
-
-    my_size = calc_circle(10)
-
-    print(my_size)
+    cars_list = import_cars_by_brand("audi")
