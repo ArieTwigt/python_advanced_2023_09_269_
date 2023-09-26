@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def convert_list_to_df(list_to_convert: list) -> pd.DataFrame:
+def convert_list_to_df(list_to_convert: list, group_data=False) -> pd.DataFrame:
     '''
     Accepts a list and converts it to a pandas DataFrame
     
@@ -56,4 +56,27 @@ def convert_list_to_df(list_to_convert: list) -> pd.DataFrame:
     # df_sub_cols['catalogusprijs'].mean()
     # df_sub_cols['catalogusprijs'].max()
     # df_sub_cols['catalogusprijs'].sum()
-    pass
+
+
+    # if we want to group the data
+    if group_data:
+
+        # grouping and summarizing data --> Data Pipeline
+        group_columns = ['handelsbenaming', 'catalogusprijs']
+
+        df_sub_cols_filtered_grouped = (
+            df_sub_cols_filtered[group_columns]
+            .groupby('handelsbenaming')
+            .mean('catalogusprijs')
+            .rename(columns={'catalogusprijs': 'gemiddelde_catalogusprijs'})
+            .sort_values(by='gemiddelde_catalogusprijs', ascending=False)
+            .reset_index()
+        )
+        
+        # return the grouped DataFrame
+        return df_sub_cols_filtered_grouped
+
+    # return the un-grouped DataFrame
+    return df_sub_cols_filtered
+
+    # return from the function
