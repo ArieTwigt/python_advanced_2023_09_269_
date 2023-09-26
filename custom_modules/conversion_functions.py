@@ -76,7 +76,7 @@ def convert_list_to_df(list_to_convert: list, group_data=False) -> pd.DataFrame:
         # return the grouped DataFrame
         return df_sub_cols_filtered_grouped
 
-    # return the un-grouped DataFrame
+    # return the un-grouped DataFram
     return df_sub_cols_filtered
 
     # return from the function
