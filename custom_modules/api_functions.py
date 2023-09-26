@@ -12,7 +12,7 @@ def import_cars_by_brand(brand: str, more_data: bool=False) -> list:
 
     # modify if we want more data
     if more_data:
-        print("Getting more data")
+        print("⬇️ Getting more data")
         endpoint = endpoint + "&$limit=10000"
     
     # execute the request
