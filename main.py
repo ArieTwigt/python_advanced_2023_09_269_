@@ -1,5 +1,8 @@
 from custom_modules.calculation_functions import calc_circle
 
-my_size = calc_circle("arie")
 
-print(my_size)
+if __name__ == "__main__":
+
+    my_size = calc_circle(10)
+
+    print(my_size)

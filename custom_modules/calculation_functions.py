@@ -1,7 +1,7 @@
 import math
 
 # define a function with type hinting
-def calc_circle(diameter: float) -> float:
+def calc_circle(diameter: float, double: bool=True) -> float:
     '''
     Function to calculate the size of a circle
     '''
@@ -21,6 +21,10 @@ def calc_circle(diameter: float) -> float:
 
     # calculate the size
     size = math.pow(radius, 2) * math.pi
+
+    if double:
+        print("Doubled the result")
+        return size * 2
 
     return size
     
