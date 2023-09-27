@@ -26,7 +26,7 @@ def convert_list_to_df(list_to_convert: list, group_data=False) -> pd.DataFrame:
     # create list of columns
     selected_columns = ['kenteken', 'merk', 'handelsbenaming', 'catalogusprijs', 'datum_tenaamstelling']
     
-    df_sub_cols = df[selected_columns].copy()
+    df_sub_cols = df[selected_columns].copy() # add .copy() to get rid of the warnings and ceveat messsages
 
     # convert columns to the right types
     # check the types

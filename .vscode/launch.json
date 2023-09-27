@@ -11,7 +11,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["-b=bmw", "-g=True"]
+            "args": ["-b=bmw", "-g=True", "-s=csv"]
         }
     ]
 }

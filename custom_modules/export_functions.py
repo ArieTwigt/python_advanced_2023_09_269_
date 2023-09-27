@@ -10,10 +10,10 @@ def export_df_to_csv(df: pd.DataFrame, brand_name="car_export") -> None:
     file_path = f"data/{brand_name}/{brand_name}.csv"
 
     # list the files and folders in the current directory
-    files_folders = os.listdir()
+    files_folders = os.listdir("data")
 
     # check if the new directory already exists
-    brand_folder = f"data/{brand_name}"
+    brand_folder = brand_name
 
     if brand_folder not in files_folders:
         os.mkdir(brand_folder)
