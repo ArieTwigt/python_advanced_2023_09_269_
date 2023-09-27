@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import requests
+from tqdm import tqdm
 
 
 class CarData:
@@ -14,18 +15,20 @@ class CarData:
 
     
     # collect the brand names
-    def add_brands(self, *args) -> None:
-
+    def add_brands(self, brands) -> None:
+        
+        selected_brands_list = brands.split("+")
+        
         # iterate for the brands
-        for brand in args:
+        for brand in selected_brands_list:
             self.brands_list.append(brand)
 
         print("Succesfully added brands")
 
 
     # function to import data from the rdw
-    def import_cars_by_brand(brand: str, more_data: bool=False) -> pd.DataFrame:
-
+    def import_cars_by_brand(self, brand: str, more_data: bool=False) -> pd.DataFrame:
+ 
         # uppercase the brand
         brand_upper = brand.upper()
 
@@ -38,9 +41,9 @@ class CarData:
             endpoint = endpoint + "&$limit=10000"
         
         # execute the request
-        print("🕒Getting data from API")
+        #print("🕒Getting data from API")
         response = requests.get(endpoint)
-        print("✅ Got data from API")
+        #print("✅ Got data from API")
 
         # get the data from the response
         data = response.json()
@@ -60,12 +63,12 @@ class CarData:
         # execute the api call for every brand in the list
         car_brands_list = self.brands_list
 
-        for car_brand in car_brands_list:
+        for car_brand in tqdm(car_brands_list):
             df = self.import_cars_by_brand(car_brand)   
             self.df_list.append(df)
 
     
-    def transform_df(df: pd.DataFrame, group_data=False) -> pd.DataFrame:
+    def transform_df(self, df: pd.DataFrame, group_data=False) -> pd.DataFrame:
         '''
         Accepts a list and converts it to a pandas DataFrame
         
@@ -116,13 +119,13 @@ class CarData:
     
 
     # method for converting all the DataFrames in the list
-    def transform_df_all(self):
+    def transform_df_all(self, group_data):
 
         # iterate over every DataFrame for the conversion
         df_list = self.df_list
 
         for idx, df in enumerate(df_list):
-            df_converted = self.transform_df(df)
+            df_converted = self.transform_df(df, group_data)
             self.df_list[idx] = df_converted
 
         print(f"✅ Done with converting {len(self.df_list)} DataFrames")
@@ -140,7 +143,7 @@ class CarData:
         self.combined_df = df_combined
 
     
-    def export_df_to_csv(df: pd.DataFrame, brand_name="car_export") -> None:
+    def export_df_to_csv(self, df: pd.DataFrame, brand_name="car_export") -> None:
         '''
         Export the data frame to a csv file
         '''
@@ -159,7 +162,8 @@ class CarData:
         
         # export the pandas DataFrame
         print("🕒 Export data")
-        df.to_csv(file_path, sep=";", index=False)
+        #df.to_csv(file_path, sep=";", index=False)
+        print(df)
         print("✅ Successfully exported data")
 
 

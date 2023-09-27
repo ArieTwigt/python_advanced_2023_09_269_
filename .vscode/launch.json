@@ -19,7 +19,7 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["-b=bmw", "-g=True", "-s=csv"]
+      "args": ["-b=bmw+audi+toyota+tesla+nissan+opel", "-g=True", "-s=print"]
     }
   ]
 }
